@@ -1,0 +1,3 @@
+module ValidAttribute
+  # Your code goes here...
+end
