@@ -1,5 +1,15 @@
 module ValidAttribute
 
+  # Test if an attribute is valid
+  #
+  # examples:
+  #  it { should have_valid(:name).with('Brian') }
+  #  it { should_not have_valid(:name).message("can't be blank") }
+  #  it { should have_valid(:email).with('test@test.com', 'test+spam@gmail.com') }
+  #
+  # @param [Symbol]
+  #
+  # @return [ValidAttribute::ValidAttributeMatcher]
   def have_valid(attr)
     ValidAttributeMatcher.new(attr)
   end
