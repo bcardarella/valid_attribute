@@ -1,0 +1,1 @@
+rvm --create default@valid_attribute > /dev/null
