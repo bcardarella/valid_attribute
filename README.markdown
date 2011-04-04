@@ -10,7 +10,7 @@ If you're using Rails just add the library to your Gemfile
 
 Then add it to your spec_helper
 
-   require 'valid_attribute'
+    require 'valid_attribute'
 
 ## Usage ##
 
@@ -41,6 +41,16 @@ Instead of having validation specific matchers ValidAttribute only cares if the 
         it { should_not have_valid(:password) }
       end
     end
+
+## Non-ActiveModel models ##
+
+As long as your model responds to the following methods:
+
+* valid? - only used to generate errors on the model
+* errors - should be a Hash of errors, the keys being the attribute with errors and the value for each key being an array of error messages
+* model_name - used in the failure messages. Class level method
+
+Other than that everything should work!
 
 ## Legal ##
 
