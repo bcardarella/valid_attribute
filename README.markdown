@@ -19,9 +19,11 @@ Instead of having validation specific matchers ValidAttribute only cares if the 
     class User
       include ActiveModel::Validations
 
-      validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :message => 'invalid email format' }
-      validates :name,  :length => { :minimum => 5 }
-      validates :password, :confirmation => true
+      attr_accessor :email, :name, :password
+
+      validates :email,    :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :message => 'invalid email format' }
+      validates :name,     :length => { :minimum => 5 }
+      validates :password, :confirmation => true, :presence => true
     end
 
     describe User do
@@ -31,6 +33,7 @@ Instead of having validation specific matchers ValidAttribute only cares if the 
       it { should have_valid(:name).with('TestName')
       it { should_not have_valid(:name).with('Test')
 
+      # Because 'should' works off the the 'subject' in RSpec we can set other values if necessary for a given validation test
       describe 'password' do
         before { subject.password_confirmation = 'password' }
         it { should have_valid(:password).with('password') }
@@ -38,3 +41,11 @@ Instead of having validation specific matchers ValidAttribute only cares if the 
         it { should_not have_valid(:password) }
       end
     end
+
+## Legal ##
+
+Brian Cardarella &copy; 2011
+
+[@bcardarella](http://twitter.com/bcardarella)
+
+[Licensed under the MIT license](http://www.opensource.org/licenses/mit-license.php)
