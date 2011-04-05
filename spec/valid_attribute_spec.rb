@@ -6,6 +6,7 @@ end
 
 class User
   attr_accessor :name
+  attr_accessor :email
 
   def errors
     @error ||= {}
@@ -114,6 +115,12 @@ describe 'ValidAttribute' do
       matcher = @should.have_valid(:name).when('Brian').message('is not valid')
       matcher.matches?(@user)
       matcher.negative_failure_message.should == " expected User#name to not accept a value of 'Brian' with a message of 'is not valid'"
+    end
+
+    it 'includes the validation message when no validation exsits yet' do
+      matcher = @should.have_valid(:email).when(123)
+      matcher.matches?(@user)
+      matcher.negative_failure_message.should == " expected User#email to not accept a value of 123"
     end
   end
 

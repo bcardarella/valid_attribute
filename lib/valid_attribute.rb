@@ -15,7 +15,7 @@ module ValidAttribute
   end
 
   class ValidAttributeMatcher
-    attr_accessor :attr, :values, :validation_message, :subject, :failed_value
+    attr_accessor :attr, :values, :validation_message, :subject, :test_value
 
     def initialize(attr)
       self.attr   = attr
@@ -46,10 +46,10 @@ module ValidAttribute
     end
 
     def value_message
-      if failed_value.is_a?(String)
-        "'#{failed_value}'"
+      if test_value.is_a?(String)
+        "'#{test_value}'"
       else
-        failed_value
+        test_value
       end
     end
 
@@ -63,9 +63,10 @@ module ValidAttribute
       values.each do |value|
         subject.send("#{attr}=", value)
         subject.valid?
+        self.test_value = value
 
         if subject.errors.include?(attr)
-          self.failed_value = value
+          self.test_value = value
           if validation_message
             return !subject.errors[attr].include?(validation_message)
           else
