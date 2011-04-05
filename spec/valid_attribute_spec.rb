@@ -29,12 +29,12 @@ describe 'ValidAttribute' do
     end
 
     it 'passes with no value set' do
-      matcher = @should.have_valid(:name).with(nil)
+      matcher = @should.have_valid(:name).when(nil)
       matcher.matches?(@user).should be_true
     end
 
     it 'passes with values set' do
-      matcher = @should.have_valid(:name).with('Brian', 'Stephanie')
+      matcher = @should.have_valid(:name).when('Brian', 'Stephanie')
       matcher.matches?(@user).should be_true
     end
   end
@@ -46,17 +46,17 @@ describe 'ValidAttribute' do
     end
 
     it 'returns false when no message passed' do
-      matcher = @should.have_valid(:name).with(nil)
+      matcher = @should.have_valid(:name).when(nil)
       matcher.matches?(@user).should be_false
     end
 
     it 'returns true when wrong message is passed' do
-      matcher = @should.have_valid(:name).with(nil).message('wrong message')
+      matcher = @should.have_valid(:name).when(nil).message('wrong message')
       matcher.matches?(@user).should_not be_false
     end
 
     it 'returns false when correct message is passed' do
-      matcher = @should.have_valid(:name).with(nil).message('is not valid')
+      matcher = @should.have_valid(:name).when(nil).message('is not valid')
       matcher.matches?(@user).should be_false
     end
   end
@@ -68,7 +68,7 @@ describe 'ValidAttribute' do
     end
 
     it 'returns false' do
-      matcher = @should.have_valid(:name).with('true', 'false')
+      matcher = @should.have_valid(:name).when('true', 'false')
       matcher.matches?(@user).should be_false
     end
   end
@@ -80,13 +80,13 @@ describe 'ValidAttribute' do
     end
 
     it 'has a message for string values' do
-      matcher = @should.have_valid(:name).with('Brian')
+      matcher = @should.have_valid(:name).when('Brian')
       matcher.matches?(@user)
       matcher.failure_message.should == " expected User#name to accept a value of 'Brian'"
     end
 
     it 'has a message for non string values' do
-      matcher = @should.have_valid(:name).with(123)
+      matcher = @should.have_valid(:name).when(123)
       matcher.matches?(@user)
       matcher.failure_message.should == " expected User#name to accept a value of 123"
     end
@@ -99,29 +99,29 @@ describe 'ValidAttribute' do
     end
 
     it 'has a message for string values' do
-      matcher = @should.have_valid(:name).with('Brian')
+      matcher = @should.have_valid(:name).when('Brian')
       matcher.matches?(@user)
       matcher.negative_failure_message.should == " expected User#name to not accept a value of 'Brian'"
     end
 
     it 'has a message for non string values' do
-      matcher = @should.have_valid(:name).with(123)
+      matcher = @should.have_valid(:name).when(123)
       matcher.matches?(@user)
       matcher.negative_failure_message.should == " expected User#name to not accept a value of 123"
     end
 
     it 'includes the validation message' do
-      matcher = @should.have_valid(:name).with('Brian').message('is not valid')
+      matcher = @should.have_valid(:name).when('Brian').message('is not valid')
       matcher.matches?(@user)
       matcher.negative_failure_message.should == " expected User#name to not accept a value of 'Brian' with a message of 'is not valid'"
     end
   end
 
-  it 'requires .with to always be used' do
+  it 'requires .when to always be used' do
     matcher = @should.have_valid(:name)
     expect do
       matcher.matches?(@user)
-    end.to raise_error ValidAttribute::NoValues, "you need to set the values with .with on the matcher (ex. it { should have_valid(:name).with('Brian') })"
+    end.to raise_error ValidAttribute::NoValues, "you need to set the values with .when on the matcher (ex. it { should have_valid(:name).when('Brian') })"
   end
 
 end

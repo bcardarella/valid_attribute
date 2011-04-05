@@ -3,9 +3,9 @@ module ValidAttribute
   # Test if an attribute is valid
   #
   # examples:
-  #  it { should have_valid(:name).with('Brian') }
+  #  it { should have_valid(:name).when('Brian') }
   #  it { should_not have_valid(:name).message("can't be blank") }
-  #  it { should have_valid(:email).with('test@test.com', 'test+spam@gmail.com') }
+  #  it { should have_valid(:email).when('test@test.com', 'test+spam@gmail.com') }
   #
   # @param [Symbol]
   #
@@ -21,7 +21,7 @@ module ValidAttribute
       self.attr   = attr
     end
 
-    def with(*values)
+    def when(*values)
       self.values = values
       self
     end
@@ -55,7 +55,7 @@ module ValidAttribute
 
     def matches?(subject)
       unless values
-        raise ::ValidAttribute::NoValues, "you need to set the values with .with on the matcher (ex. it { should have_valid(:name).with('Brian') })"
+        raise ::ValidAttribute::NoValues, "you need to set the values with .when on the matcher (ex. it { should have_valid(:name).when('Brian') })"
       end
 
       self.subject = subject
