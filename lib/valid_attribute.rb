@@ -1,5 +1,5 @@
 module ValidAttribute
-
+  class NoValues < StandardError; end
   # Test if an attribute is valid
   #
   # examples:
@@ -19,7 +19,6 @@ module ValidAttribute
 
     def initialize(attr)
       self.attr   = attr
-      self.values = [nil]
     end
 
     def with(*values)
@@ -55,6 +54,10 @@ module ValidAttribute
     end
 
     def matches?(subject)
+      unless values
+        raise ::ValidAttribute::NoValues, "you need to set the values with .with on the matcher (ex. it { should have_valid(:name).with('Brian') })"
+      end
+
       self.subject = subject
 
       values.each do |value|

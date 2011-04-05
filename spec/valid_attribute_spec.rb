@@ -29,7 +29,7 @@ describe 'ValidAttribute' do
     end
 
     it 'passes with no value set' do
-      matcher = @should.have_valid(:name)
+      matcher = @should.have_valid(:name).with(nil)
       matcher.matches?(@user).should be_true
     end
 
@@ -46,17 +46,17 @@ describe 'ValidAttribute' do
     end
 
     it 'returns false when no message passed' do
-      matcher = @should.have_valid(:name)
+      matcher = @should.have_valid(:name).with(nil)
       matcher.matches?(@user).should be_false
     end
 
     it 'returns true when wrong message is passed' do
-      matcher = @should.have_valid(:name).message('wrong message')
+      matcher = @should.have_valid(:name).with(nil).message('wrong message')
       matcher.matches?(@user).should_not be_false
     end
 
     it 'returns false when correct message is passed' do
-      matcher = @should.have_valid(:name).message('is not valid')
+      matcher = @should.have_valid(:name).with(nil).message('is not valid')
       matcher.matches?(@user).should be_false
     end
   end
@@ -115,6 +115,13 @@ describe 'ValidAttribute' do
       matcher.matches?(@user)
       matcher.negative_failure_message.should == " expected User#name to not accept a value of 'Brian' with a message of 'is not valid'"
     end
+  end
+
+  it 'requires .with to always be used' do
+    matcher = @should.have_valid(:name)
+    expect do
+      matcher.matches?(@user)
+    end.to raise_error ValidAttribute::NoValues, "you need to set the values with .with on the matcher (ex. it { should have_valid(:name).with('Brian') })"
   end
 
 end
