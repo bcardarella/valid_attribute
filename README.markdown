@@ -27,18 +27,17 @@ Instead of having validation specific matchers ValidAttribute only cares if the 
     end
 
     describe User do
-      # The .with method can take any number of values that you want to pass
-      it { should have_valid(:email).with('test@test.com', 'test+spam@gmail.com') }
-      it { should_not have_valid(:email).with('fail', 123).message('invalid email format') }
-      it { should have_valid(:name).with('TestName')
-      it { should_not have_valid(:name).with('Test')
+      # The .when method can take any number of values that you want to pass
+      it { should have_valid(:email).when('test@test.com', 'test+spam@gmail.com') }
+      it { should_not have_valid(:email).when('fail', 123).message('invalid email format') }
+      it { should have_valid(:name).when('TestName')
+      it { should_not have_valid(:name).when('Test')
 
       # Because 'should' works off the the 'subject' in RSpec we can set other values if necessary for a given validation test
       describe 'password' do
         before { subject.password_confirmation = 'password' }
-        it { should have_valid(:password).with('password') }
-        # Not providing '.with' defaults to nil
-        it { should_not have_valid(:password) }
+        it { should have_valid(:password).when('password') }
+        it { should_not have_valid(:password).when(nil) }
       end
     end
 
