@@ -1,5 +1,6 @@
 == 0.0.3
-  should_not
+  should_not fix for when the validation key doesn't exist yet
+  removed .message method. Not good BDD
 
 == 0.0.2
   Removed default value, allways required to pass value
