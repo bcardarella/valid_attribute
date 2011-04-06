@@ -29,12 +29,7 @@ describe 'ValidAttribute' do
       @user.stubs(:valid?).returns(true)
     end
 
-    it 'passes with no value set' do
-      matcher = @should.have_valid(:name).when(nil)
-      matcher.matches?(@user).should be_true
-    end
-
-    it 'passes with values set' do
+    it 'passes with values' do
       matcher = @should.have_valid(:name).when('Brian', 'Stephanie')
       matcher.matches?(@user).should be_true
     end
@@ -43,21 +38,11 @@ describe 'ValidAttribute' do
   describe 'invalid data' do
     before do
       @user.stubs(:valid?).returns(false)
-      @user.errors[:name] = ['is not valid']
+      @user.errors[:name] = []
     end
 
-    it 'returns false when no message passed' do
-      matcher = @should.have_valid(:name).when(nil)
-      matcher.matches?(@user).should be_false
-    end
-
-    it 'returns true when wrong message is passed' do
-      matcher = @should.have_valid(:name).when(nil).message('wrong message')
-      matcher.matches?(@user).should_not be_false
-    end
-
-    it 'returns false when correct message is passed' do
-      matcher = @should.have_valid(:name).when(nil).message('is not valid')
+    it 'fails with values' do
+      matcher = @should.have_valid(:name).when('Brian', 'Stephanie')
       matcher.matches?(@user).should be_false
     end
   end
@@ -65,7 +50,7 @@ describe 'ValidAttribute' do
   describe 'data is first valid then invalid' do
     before do
       @user.stubs(:valid?).returns(true).then.returns(false)
-      @user.errors[:name] = ['is not valid']
+      @user.errors[:name] = []
     end
 
     it 'returns false' do
@@ -77,7 +62,7 @@ describe 'ValidAttribute' do
   describe 'failure message' do
     before do
       @user.stubs(:valid?).returns(false)
-      @user.errors[:name] = ['is not valid']
+      @user.errors[:name] = []
     end
 
     it 'has a message for string values' do
@@ -109,12 +94,6 @@ describe 'ValidAttribute' do
       matcher = @should.have_valid(:name).when(123)
       matcher.matches?(@user)
       matcher.negative_failure_message.should == " expected User#name to not accept a value of 123"
-    end
-
-    it 'includes the validation message' do
-      matcher = @should.have_valid(:name).when('Brian').message('is not valid')
-      matcher.matches?(@user)
-      matcher.negative_failure_message.should == " expected User#name to not accept a value of 'Brian' with a message of 'is not valid'"
     end
 
     it 'includes the validation message when no validation exsits yet' do
