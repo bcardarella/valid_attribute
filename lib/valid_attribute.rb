@@ -44,10 +44,6 @@ module ValidAttribute
       end
     end
 
-    def quote_values(values)
-      values.map { |value| value.is_a?(String) ? "'#{value}'" : value }.join(', ')
-    end
-
     def matches?(subject)
       unless values
         raise ::ValidAttribute::NoValues, "you need to set the values with .when on the matcher (ex. it { should have_valid(:name).when('Brian') })"
@@ -66,6 +62,12 @@ module ValidAttribute
       end
 
       failed_values.empty?
+    end
+
+    private
+
+    def quote_values(values)
+      values.map { |value| value.is_a?(String) ? "'#{value}'" : value }.join(', ')
     end
 
   end
