@@ -4,8 +4,9 @@ module ValidAttribute
   #
   # examples:
   #  it { should have_valid(:name).when('Brian') }
-  #  it { should_not have_valid(:name).message("can't be blank") }
+  #  it { should_not have_valid(:name).when(nil) }
   #  it { should have_valid(:email).when('test@test.com', 'test+spam@gmail.com') }
+  #  it { should_not have_valid(:email).when('abc', 123) }
   #
   # @param [Symbol]
   #
