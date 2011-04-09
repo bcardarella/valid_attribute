@@ -15,10 +15,12 @@ module ValidAttribute
   end
 
   class ValidAttributeMatcher
-    attr_accessor :attr, :values, :subject, :test_value
+    attr_accessor :attr, :values, :subject, :failed_values, :passed_values
 
     def initialize(attr)
-      self.attr   = attr
+      self.attr          = attr
+      self.failed_values = []
+      self.passed_values = []
     end
 
     def when(*values)
@@ -26,20 +28,24 @@ module ValidAttribute
       self
     end
 
-    def negative_failure_message
-      " expected #{subject.class.model_name}##{attr} to not accept a value of #{test_value}"
-    end
-
     def failure_message
-      " expected #{subject.class.model_name}##{attr} to accept a value of #{test_value}"
+      if failed_values.size == 1
+        " expected #{subject.class.model_name}##{attr} to accept the value: #{quote_values(failed_values)}"
+      else
+        " expected #{subject.class.model_name}##{attr} to accept the values: #{quote_values(failed_values)}"
+      end
     end
 
-    def test_value
-      if @test_value.is_a?(String)
-        "'#{@test_value}'"
+    def negative_failure_message
+      if passed_values.size == 1
+        " expected #{subject.class.model_name}##{attr} to not accept the value: #{quote_values(passed_values)}"
       else
-        @test_value
+        " expected #{subject.class.model_name}##{attr} to not accept the values: #{quote_values(passed_values)}"
       end
+    end
+
+    def quote_values(values)
+      values.map { |value| value.is_a?(String) ? "'#{value}'" : value }.join(', ')
     end
 
     def matches?(subject)
@@ -52,12 +58,14 @@ module ValidAttribute
       values.each do |value|
         subject.send("#{attr}=", value)
         subject.valid?
-        self.test_value = value
-
-        return false if subject.errors.key?(attr)
+        if subject.errors.key?(attr)
+          self.failed_values << value
+        else
+          self.passed_values << value
+        end
       end
 
-      true
+      failed_values.empty?
     end
 
   end
