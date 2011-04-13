@@ -21,7 +21,7 @@ Instead of having validation specific matchers ValidAttribute only cares if the 
 
       attr_accessor :email, :name, :password
 
-      validates :email,    :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :message => 'invalid email format' }
+      validates :email,    :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
       validates :name,     :length => { :minimum => 5 }
       validates :password, :confirmation => true, :presence => true
     end
@@ -29,7 +29,7 @@ Instead of having validation specific matchers ValidAttribute only cares if the 
     describe User do
       # The .when method can take any number of values that you want to pass
       it { should have_valid(:email).when('test@test.com', 'test+spam@gmail.com') }
-      it { should_not have_valid(:email).when('fail', 123).message('invalid email format') }
+      it { should_not have_valid(:email).when('fail', 123) }
       it { should have_valid(:name).when('TestName')
       it { should_not have_valid(:name).when('Test')
 
@@ -46,8 +46,7 @@ Instead of having validation specific matchers ValidAttribute only cares if the 
 As long as your model responds to the following methods:
 
 * valid? - only used to generate errors on the model
-* errors - should be a Hash of errors, the keys being the attribute with errors and the value for each key being an array of error messages
-* model_name - used in the failure messages. Class level method
+* errors - should be a collection of attributes that have validation errors.
 
 Other than that everything should work!
 
