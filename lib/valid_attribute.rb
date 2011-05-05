@@ -19,9 +19,7 @@ module ValidAttribute
     attr_accessor :attr, :values, :subject, :failed_values, :passed_values
 
     def initialize(attr)
-      self.attr          = attr
-      self.failed_values = []
-      self.passed_values = []
+      self.attr = attr
     end
 
     def when(*values)
@@ -46,11 +44,25 @@ module ValidAttribute
     end
 
     def matches?(subject)
+      check_values(subject)
+      failed_values.empty?
+    end
+
+    def does_not_match?(subject)
+      check_values(subject)
+      passed_values.empty?
+    end
+
+    private
+
+    def check_values(subject)
       unless values
         raise ::ValidAttribute::NoValues, "you need to set the values with .when on the matcher (ex. it { should have_valid(:name).when('Brian') })"
       end
 
-      self.subject = subject
+      self.subject       = subject
+      self.failed_values = []
+      self.passed_values = []
 
       values.each do |value|
         subject.send("#{attr}=", value)
@@ -61,11 +73,7 @@ module ValidAttribute
           self.passed_values << value
         end
       end
-
-      failed_values.empty?
     end
-
-    private
 
     def quote_values(values)
       values.map { |value| value.is_a?(String) ? "'#{value}'" : value }.join(', ')

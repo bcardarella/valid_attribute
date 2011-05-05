@@ -1,3 +1,6 @@
+== 0.0.4
+  fix for multiple should_not values
+
 == 0.0.3
   should_not fix for when the validation key doesn't exist yet
   removed .message method. Not good BDD

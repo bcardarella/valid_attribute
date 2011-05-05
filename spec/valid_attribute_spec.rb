@@ -37,14 +37,19 @@ describe 'ValidAttribute' do
 
   describe 'data is first invalid then invalid' do
     before do
-      @user.stubs(:valid?).returns(false).then.returns(true).then.returns(false)
-      @user.stubs(:errors).returns({:name => []}).then.returns({})
-      @matcher = @should.have_valid(:name).when('abc', 123)
-      @result  = @matcher.matches?(@user)
+      @user.stubs(:valid?).returns(false).then.returns(true).then.returns(false).then.returns(true)
+      @user.stubs(:errors).returns({:name => []}).then.returns({}).then.returns({:name => []}).then.returns({})
+      @matcher        = @should.have_valid(:name).when('abc', 123)
+      @matches        = @matcher.matches?(@user)
+      @does_not_match = @matcher.does_not_match?(@user)
     end
 
-    it 'returns false' do
-      @result.should be_false
+    it 'matches? returns false' do
+      @matches.should be_false
+    end
+
+    it 'does_not_match? returns false' do
+      @does_not_match.should be_false
     end
 
     it 'has a failure message of the failed values' do
@@ -58,14 +63,19 @@ describe 'ValidAttribute' do
 
   describe 'data is first invalid then valid then invalid then valid' do
     before do
-      @user.stubs(:valid?).returns(false).then.returns(true).then.returns(false)
-      @user.stubs(:errors).returns({:name => []}).then.returns({}).then.returns({:name => []}).then.returns({})
-      @matcher = @should.have_valid(:name).when('abc', 123, 456, 'def')
-      @result  = @matcher.matches?(@user)
+      @user.stubs(:valid?).returns(false).then.returns(true).then.returns(false).then.returns(false).then.returns(true).then.returns(false)
+      @user.stubs(:errors).returns({:name => []}).then.returns({}).then.returns({:name => []}).then.returns({}).then.returns({:name => []}).then.returns({}).then.returns({:name => []}).then.returns({})
+      @matcher        = @should.have_valid(:name).when('abc', 123, 456, 'def')
+      @matches        = @matcher.matches?(@user)
+      @does_not_match = @matcher.does_not_match?(@user)
     end
 
-    it 'returns false' do
-      @result.should be_false
+    it 'matches? returns false' do
+      @matches.should be_false
+    end
+
+    it 'does_not_match? returns true' do
+      @does_not_match.should be_false
     end
 
     it 'has a failure message of the failed values' do
