@@ -59,6 +59,14 @@ describe 'ValidAttribute' do
     it 'has a negative failure message of the passed values' do
       @matcher.negative_failure_message.should == " expected User#name to not accept the value: 123"
     end
+
+    it 'has a description' do
+      @matcher.description.should == "User#name should be valid when: 'abc', 123"
+    end
+
+    it 'has a negative description' do
+      @matcher.negative_description.should == "User#name should not be valid when: 'abc', 123"
+    end
   end
 
   describe 'data is first invalid then valid then invalid then valid' do
@@ -84,6 +92,14 @@ describe 'ValidAttribute' do
 
     it 'has a negative failure message of the passed values' do
       @matcher.negative_failure_message.should == " expected User#name to not accept the values: 123, 'def'"
+    end
+
+    it 'has a description' do
+      @matcher.description.should == "User#name should be valid when: 'abc', 123, 456, 'def'"
+    end
+
+    it 'has a negative description' do
+      @matcher.negative_description.should == "User#name should not be valid when: 'abc', 123, 456, 'def'"
     end
   end
 
