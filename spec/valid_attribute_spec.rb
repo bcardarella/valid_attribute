@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'user'
 
 class Should
-  include ValidAttribute
+  include ValidAttribute::Method
 end
 
 describe 'ValidAttribute' do

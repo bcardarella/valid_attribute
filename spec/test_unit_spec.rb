@@ -1,8 +1,8 @@
 # This is a RSpec spec to test TestUnit... yeah that's right
 
+require 'spec_helper'
 require 'test/unit'
 require 'valid_attribute/test_unit'
-require 'valid_attribute/matcher'
 
 describe 'Test::Unit::TestCase' do
   it '.have_valid' do

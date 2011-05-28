@@ -1,3 +1,3 @@
 module RSpec::Matchers
-  include ValidAttribute
+  include ValidAttribute::Method
 end
