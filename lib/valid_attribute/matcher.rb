@@ -38,7 +38,7 @@ module ValidAttribute
 
     def does_not_match?(subject)
       check_values(subject)
-      passed_values.empty?
+      !passed_values.empty?
     end
 
     private

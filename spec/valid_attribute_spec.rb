@@ -37,7 +37,7 @@ describe 'ValidAttribute' do
     end
 
     it 'does_not_match? returns false' do
-      @does_not_match.should be_false
+      @does_not_match.should be_true
     end
 
     it 'has a failure message of the failed values' do
@@ -67,7 +67,7 @@ describe 'ValidAttribute' do
     end
 
     it 'does_not_match? returns true' do
-      @does_not_match.should be_false
+      @does_not_match.should be_true
     end
 
     it 'has a failure message of the failed values' do
