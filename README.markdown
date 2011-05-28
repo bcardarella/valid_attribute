@@ -4,17 +4,26 @@ ValidAttribute is a minimalist framework for validation BDD.
 
 ## Installation ##
 
-If you're using Rails just add the library to your Gemfile
+If you're using `RSpec` just add the `valid_attribute` to your `Gemfile`
 
     gem 'valid_attribute'
 
-Then add it to your spec_helper
+Then add it to your `spec_helper.rb`
 
+    require 'valid_attribute'
+
+or if you're using `Test::Unit`, you must use [Thoughtbot](http://thoughtbot.com)'s [shoulda-context](https://github.com/thoughtbot/shoulda-context)
+
+    # Gemfile
+    gem 'shoulda-context'
+
+    # test_helper.rb
+    require 'shoulda-context'
     require 'valid_attribute'
 
 ## Usage ##
 
-Instead of having validation specific matchers ValidAttribute only cares if the attribute is valid under certain circumstances
+Instead of having validation specific matchers `ValidAttribute` only cares if the attribute is valid under certain circumstances
 
     class User
       include ActiveModel::Validations
@@ -26,12 +35,13 @@ Instead of having validation specific matchers ValidAttribute only cares if the 
       validates :password, :confirmation => true, :presence => true
     end
 
+    # RSpec
     describe User do
       # The .when method can take any number of values that you want to pass
       it { should have_valid(:email).when('test@test.com', 'test+spam@gmail.com') }
       it { should_not have_valid(:email).when('fail', 123) }
-      it { should have_valid(:name).when('TestName')
-      it { should_not have_valid(:name).when('Test')
+      it { should have_valid(:name).when('TestName') }
+      it { should_not have_valid(:name).when('Test') }
 
       # Because 'should' works off the the 'subject' in RSpec we can set other values if necessary for a given validation test
       describe 'password' do
@@ -41,12 +51,29 @@ Instead of having validation specific matchers ValidAttribute only cares if the 
       end
     end
 
+    # TestUnit
+    require 'should/context'
+    class UserTest < Test::Unit::TestCase
+      # The .when method can take any number of values that you want to pass
+      should have_valid(:email).when('test@test.com', 'test+spam@gmail.com')
+      should_not have_valid(:email).when('fail', 123)
+      should have_valid(:name).when('TestName')
+      should_not have_valid(:name).when('Test')
+
+      # Because 'shoulda-context' works off the the 'subject' we can set other values if necessary for a given validation test
+      context 'password' do
+        subject { User.new(:password_confirmation => 'password') }
+        should have_valid(:password).when('password')
+        should_not have_valid(:password).when(nil)
+      end
+    end
+
 ## Non-ActiveModel models ##
 
-As long as your model responds to the following methods:
+Your model should respond to the following methods:
 
-* valid? - only used to generate errors on the model
-* errors - should be a collection of attributes that have validation errors.
+* `valid?` - only used to generate errors on the model
+* `errors` - should be a collection of attributes that have validation errors.
 
 Other than that everything should work!
 

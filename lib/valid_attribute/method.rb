@@ -15,7 +15,7 @@ module ValidAttribute
     #    end
     #  end
     #
-    # If you are using Test::Unit you should use Thoughtbot's shoulda-context:
+    # If you are using Test::Unit you should use {http://thoughtbot.com Thoughtbot}'s {https://github.com/thoughtbot/shoulda-context shoulda-context}:
     #  class UserTest < Test::Unit::TestCase
     #    should have_valid(:name).when('Brian')
     #    should_not have_valid(:name).when('nil')
