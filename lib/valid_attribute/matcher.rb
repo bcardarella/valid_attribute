@@ -45,7 +45,7 @@ module ValidAttribute
 
     def check_values(subject)
       unless values
-        raise ::ValidAttribute::NoValues, "you need to set the values with .when on the matcher (ex. it { should have_valid(:name).when('Brian') })"
+        raise ::ValidAttribute::NoValues, "you need to set the values with .when on the matcher. Example: have_valid(:name).when('Brian')"
       end
 
       self.subject       = subject

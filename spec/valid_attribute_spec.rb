@@ -96,7 +96,7 @@ describe 'ValidAttribute' do
     matcher = @should.have_valid(:name)
     expect do
       matcher.matches?(@user)
-    end.to raise_error ValidAttribute::NoValues, "you need to set the values with .when on the matcher (ex. it { should have_valid(:name).when('Brian') })"
+    end.to raise_error ValidAttribute::NoValues, "you need to set the values with .when on the matcher. Example: have_valid(:name).when('Brian')"
   end
 
 end
