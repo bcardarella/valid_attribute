@@ -13,17 +13,17 @@ module ValidAttribute
 
     def failure_message
       if failed_values.size == 1
-        " expected #{subject.class.model_name}##{attr} to accept the value: #{quote_values(failed_values)}"
+        " expected #{subject.class}##{attr} to accept the value: #{quote_values(failed_values)}"
       else
-        " expected #{subject.class.model_name}##{attr} to accept the values: #{quote_values(failed_values)}"
+        " expected #{subject.class}##{attr} to accept the values: #{quote_values(failed_values)}"
       end
     end
 
     def negative_failure_message
       if passed_values.size == 1
-        " expected #{subject.class.model_name}##{attr} to not accept the value: #{quote_values(passed_values)}"
+        " expected #{subject.class}##{attr} to not accept the value: #{quote_values(passed_values)}"
       else
-        " expected #{subject.class.model_name}##{attr} to not accept the values: #{quote_values(passed_values)}"
+        " expected #{subject.class}##{attr} to not accept the values: #{quote_values(passed_values)}"
       end
     end
 
