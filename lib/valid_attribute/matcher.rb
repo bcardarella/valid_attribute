@@ -28,11 +28,7 @@ module ValidAttribute
     end
 
     def description
-      "#{subject.class.model_name}##{attr} should be valid when: #{quote_values(values)}"
-    end
-
-    def negative_description
-      "#{subject.class.model_name}##{attr} should not be valid when: #{quote_values(values)}"
+      "be valid when: #{quote_values(values)}"
     end
 
     def matches?(subject)

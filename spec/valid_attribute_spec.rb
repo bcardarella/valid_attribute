@@ -49,11 +49,7 @@ describe 'ValidAttribute' do
     end
 
     it 'has a description' do
-      @matcher.description.should == "User#name should be valid when: 'abc', 123"
-    end
-
-    it 'has a negative description' do
-      @matcher.negative_description.should == "User#name should not be valid when: 'abc', 123"
+      @matcher.description.should == "be valid when: 'abc', 123"
     end
   end
 
@@ -83,11 +79,7 @@ describe 'ValidAttribute' do
     end
 
     it 'has a description' do
-      @matcher.description.should == "User#name should be valid when: 'abc', 123, 456, 'def'"
-    end
-
-    it 'has a negative description' do
-      @matcher.negative_description.should == "User#name should not be valid when: 'abc', 123, 456, 'def'"
+      @matcher.description.should == "be valid when: 'abc', 123, 456, 'def'"
     end
   end
 
