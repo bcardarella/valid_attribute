@@ -1,3 +1,6 @@
+== 0.2.0
+  Test::Unit::TestCase support. You should use shoulda-context
+
 == 0.1.0
   Version bump. API is stable
 
