@@ -12,74 +12,83 @@ describe 'ValidAttribute' do
     @user   = User.new
   end
 
-  describe 'valid data' do
-    before do
-      @user.stubs(:valid?).returns(true)
+  describe 'matcher result' do
+    context 'data is valid' do
+      before do
+        @user.stubs(:valid?).returns(true)
+        @user.stubs(:errors).returns({})
+        @matcher = @should.have_valid(:name).when('abc', 123)
+      end
+
+      it 'matches? returns true' do
+        @matcher.matches?(@user).should be_true
+      end
+
+      it 'does_not_match? returns false' do
+        @matcher.does_not_match?(@user).should be_false
+      end
+
+      describe 'messages' do
+        it '#negative_failue_message' do
+          @matcher.matches?(@user)
+          @matcher.negative_failure_message.should == " expected User#name to not accept the values: 'abc', 123"
+        end
+      end
     end
 
-    it 'passes with values' do
-      matcher = @should.have_valid(:name).when('Brian', 'Stephanie')
-      matcher.matches?(@user).should be_true
-    end
-  end
+    context 'data is invalid' do
+      before do
+        @user.stubs(:valid?).returns(false)
+        @user.stubs(:errors).returns({:name => []})
+        @matcher = @should.have_valid(:name).when('abc', 123)
+      end
 
-  describe 'data is first invalid then invalid' do
-    before do
-      @user.stubs(:valid?).returns(false).then.returns(true).then.returns(false).then.returns(true)
-      @user.stubs(:errors).returns({:name => []}).then.returns({}).then.returns({:name => []}).then.returns({})
-      @matcher        = @should.have_valid(:name).when('abc', 123)
-      @matches        = @matcher.matches?(@user)
-      @does_not_match = @matcher.does_not_match?(@user)
-    end
+      it 'matches? returns false' do
+        @matcher.matches?(@user).should be_false
+      end
 
-    it 'matches? returns false' do
-      @matches.should be_false
-    end
+      it 'does_not_match? returns true' do
+        @matcher.does_not_match?(@user).should be_true
+      end
 
-    it 'does_not_match? returns false' do
-      @does_not_match.should be_true
-    end
-
-    it 'has a failure message of the failed values' do
-      @matcher.failure_message.should == " expected User#name to accept the value: 'abc'"
+      describe 'messages' do
+        it '#failue_message' do
+          @matcher.matches?(@user)
+          @matcher.failure_message.should == " expected User#name to accept the values: 'abc', 123"
+        end
+      end
     end
 
-    it 'has a negative failure message of the passed values' do
-      @matcher.negative_failure_message.should == " expected User#name to not accept the value: 123"
-    end
+    context 'data is valid then invalid' do
+      before do
+        @user.stubs(:valid?).returns(true).then.returns(false)
+        @user.stubs(:errors).returns({}).then.returns({:name => []})
+        @matcher = @should.have_valid(:name).when('abc', 123)
+      end
 
-    it 'has a description' do
-      @matcher.description.should == "be valid when: 'abc', 123"
-    end
-  end
+      it 'matches? returns false' do
+        @matcher.matches?(@user).should be_false
+      end
 
-  describe 'data is first invalid then valid then invalid then valid' do
-    before do
-      @user.stubs(:valid?).returns(false).then.returns(true).then.returns(false).then.returns(false).then.returns(true).then.returns(false)
-      @user.stubs(:errors).returns({:name => []}).then.returns({}).then.returns({:name => []}).then.returns({}).then.returns({:name => []}).then.returns({}).then.returns({:name => []}).then.returns({})
-      @matcher        = @should.have_valid(:name).when('abc', 123, 456, 'def')
-      @matches        = @matcher.matches?(@user)
-      @does_not_match = @matcher.does_not_match?(@user)
-    end
+      it 'does_not_match? returns false' do
+        @matcher.does_not_match?(@user).should be_false
+      end
 
-    it 'matches? returns false' do
-      @matches.should be_false
-    end
+      describe 'messages' do
+        it '#failure_message' do
+          @matcher.matches?(@user)
+          @matcher.failure_message.should == " expected User#name to accept the value: 123"
+        end
 
-    it 'does_not_match? returns true' do
-      @does_not_match.should be_true
-    end
+        it '#negative_failure_message' do
+          @matcher.matches?(@user)
+          @matcher.negative_failure_message.should == " expected User#name to not accept the value: 'abc'"
+        end
 
-    it 'has a failure message of the failed values' do
-      @matcher.failure_message.should == " expected User#name to accept the values: 'abc', 456"
-    end
-
-    it 'has a negative failure message of the passed values' do
-      @matcher.negative_failure_message.should == " expected User#name to not accept the values: 123, 'def'"
-    end
-
-    it 'has a description' do
-      @matcher.description.should == "be valid when: 'abc', 123, 456, 'def'"
+        it '#description' do
+          @matcher.description.should == "be valid when: 'abc', 123"
+        end
+      end
     end
   end
 
