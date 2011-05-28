@@ -6,7 +6,7 @@ require 'valid_attribute/test_unit'
 
 describe 'Test::Unit::TestCase' do
   it '.have_valid' do
-    Test::Unit::TestCase.have_valid(:name).should be_instance_of(ValidAttribute::ValidAttributeMatcher)
+    Test::Unit::TestCase.have_valid(:name).should be_instance_of(ValidAttribute::Matcher)
   end
 end
 

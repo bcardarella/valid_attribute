@@ -30,9 +30,9 @@ module ValidAttribute
     #
     # @param [Symbol]
     #
-    # @return [ValidAttribute::ValidAttributeMatcher]
+    # @return [ValidAttribute::Matcher]
     def have_valid(attr)
-      ::ValidAttribute::ValidAttributeMatcher.new(attr)
+      ::ValidAttribute::Matcher.new(attr)
     end
   end
 end

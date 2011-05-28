@@ -1,5 +1,5 @@
 module ValidAttribute
-  class ValidAttributeMatcher
+  class Matcher
     attr_accessor :attr, :values, :subject, :failed_values, :passed_values
 
     def initialize(attr)
