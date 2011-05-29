@@ -40,7 +40,7 @@ describe 'ValidAttribute' do
       before do
         @user.stubs(:valid?).returns(false)
         @user.stubs(:errors).returns({:name => []})
-        @matcher = @should.have_valid(:name).when('abc', nil)
+        @matcher = @should.have_valid(:name).when(:abc, nil)
       end
 
       it 'matches? returns false' do
@@ -54,7 +54,7 @@ describe 'ValidAttribute' do
       describe 'messages' do
         it '#failue_message' do
           @matcher.matches?(@user)
-          @matcher.failure_message.should == " expected User#name to accept the values: 'abc', nil"
+          @matcher.failure_message.should == " expected User#name to accept the values: :abc, nil"
         end
       end
     end

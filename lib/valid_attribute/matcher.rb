@@ -70,6 +70,8 @@ module ValidAttribute
           "'#{value}'"
         when NilClass
           'nil'
+        when Symbol
+          ":#{value}"
         else
           value
         end
