@@ -64,7 +64,16 @@ module ValidAttribute
     end
 
     def quote_values(values)
-      values.map { |value| value.is_a?(String) ? "'#{value}'" : value }.join(', ')
+      values.map do |value|
+        case value
+        when String
+          "'#{value}'"
+        when NilClass
+          'nil'
+        else
+          value
+        end
+      end.join(', ')
     end
 
   end
