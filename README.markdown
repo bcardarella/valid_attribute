@@ -1,6 +1,6 @@
 # ValidAttribute #
 
-ValidAttribute is a minimalist framework for validation BDD.
+ValidAttribute is a minimalist matcher for validation BDD.
 
 ## Installation ##
 

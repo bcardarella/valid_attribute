@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Brian Cardarella"]
   s.email       = ["bcardarella@gmail.com"]
   s.homepage    = "https://github.com/bcardarella/valid_attribute"
-  s.summary     = %q{Minimalist validation matcher framework}
-  s.description = %q{Minimalist validation matcher framework}
+  s.summary     = %q{Minimalist validation matcher}
+  s.description = %q{Minimalist validation matcher}
 
   s.rubyforge_project = "valid_attribute"
 
