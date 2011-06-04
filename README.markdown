@@ -83,7 +83,7 @@ class UserTest < Test::Unit::TestCase
 end
 ```
 
-## Non-ActiveModel models ##
+## Custom Models ##
 
 Your model should respond to the following methods:
 
