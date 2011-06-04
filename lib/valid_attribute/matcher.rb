@@ -55,7 +55,7 @@ module ValidAttribute
       values.each do |value|
         subject.send("#{attr}=", value)
         subject.valid?
-        if subject.errors.key?(attr)
+        if subject.errors.include?(attr)
           self.failed_values << value
         else
           self.passed_values << value
