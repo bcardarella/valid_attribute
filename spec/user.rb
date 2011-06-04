@@ -6,7 +6,7 @@ class User
     @error ||= {}
   end
 
-  def self.model_name
-    'User'
+  def valid?
+    errors.empty?
   end
 end
