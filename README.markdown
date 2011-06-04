@@ -81,7 +81,23 @@ end
 Your model should respond to the following methods:
 
 * `valid?` - only used to generate errors on the model
-* `errors` - should be a collection of attributes that have validation errors.
+* `errors` - should be a Hash of attributes that have the invalid attributes as keys.
+
+The following would be a compatible (albeit unrealistic) model:
+
+```ruby
+class User
+  attr_accessor :name
+
+  def errors
+    {:name => ["can't be blank"]}
+  end
+
+  def valid?
+    false
+  end
+end
+```
 
 Other than that everything should work!
 

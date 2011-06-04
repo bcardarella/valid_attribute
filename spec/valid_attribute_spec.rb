@@ -16,7 +16,7 @@ describe 'ValidAttribute' do
     context 'data is valid' do
       before do
         @user.stubs(:valid?).returns(true)
-        @user.stubs(:errors).returns(mock() { expects(:include?).twice.with(:name).returns(false) })
+        @user.stubs(:errors).returns({})
         @matcher = @should.have_valid(:name).when('abc', 123)
       end
 
@@ -39,7 +39,7 @@ describe 'ValidAttribute' do
     context 'data is invalid' do
       before do
         @user.stubs(:valid?).returns(false)
-        @user.stubs(:errors).returns(mock() { expects(:include?).twice.with(:name).returns(true) })
+        @user.stubs(:errors).returns({:name => ["can't be blank"]})
         @matcher = @should.have_valid(:name).when(:abc, nil)
       end
 
@@ -62,7 +62,7 @@ describe 'ValidAttribute' do
     context 'data is valid then invalid' do
       before do
         @user.stubs(:valid?).returns(true).then.returns(false)
-        @user.stubs(:errors).returns(mock() { expects(:include?).at_most(2).with(:name).returns(false).then.returns(true) })
+        @user.stubs(:errors).returns({}).then.returns({:name => ["can't be blank"]})
         @matcher = @should.have_valid(:name).when('abc', 123)
       end
 

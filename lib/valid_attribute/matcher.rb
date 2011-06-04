@@ -55,12 +55,18 @@ module ValidAttribute
       values.each do |value|
         subject.send("#{attr}=", value)
         subject.valid?
-        if subject.errors.include?(attr)
+
+        if invalid_attribute?(subject, attr)
           self.failed_values << value
         else
           self.passed_values << value
         end
       end
+    end
+
+    def invalid_attribute?(subject, attr)
+      errors = subject.errors[attr]
+      errors.respond_to?(:empty?) ? !errors.empty? : !!errors
     end
 
     def quote_values(values)
