@@ -11,7 +11,7 @@ Supported ORMs
 
 ## Installation ##
 
-If you're using `RSpec` just add the `valid_attribute` to your `Gemfile`
+If you're using `RSpec` just add the `valid_attribute` to your `Gemfile` AFTER rspec gem.
 
 ```ruby
 gem 'valid_attribute'
