@@ -66,7 +66,7 @@ describe User do
 end
 
 # TestUnit
-require 'should/context'
+require 'shoulda/context'
 class UserTest < Test::Unit::TestCase
   # The .when method can take any number of values that you want to pass
   should have_valid(:email).when('test@test.com', 'test+spam@gmail.com')
@@ -74,7 +74,7 @@ class UserTest < Test::Unit::TestCase
   should have_valid(:name).when('TestName')
   should_not have_valid(:name).when('Test')
 
-  # Because 'shoulda-context' works off the the 'subject' we can set other values if necessary for a given validation test
+  # Because 'shoulda-context' works off the 'subject' we can set other values if necessary for a given validation test
   context 'password' do
     subject { User.new(:password_confirmation => 'password') }
     should have_valid(:password).when('password')
@@ -105,8 +105,6 @@ class User
   end
 end
 ```
-
-Other than that everything should work!
 
 ## Legal ##
 
