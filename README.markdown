@@ -63,6 +63,9 @@ describe User do
     it { should have_valid(:password).when('password') }
     it { should_not have_valid(:password).when(nil) }
   end
+
+  # Using .when is optional. Without it, the existing value is examined.
+  it { should_not have_valid(:email) }
 end
 
 # TestUnit
@@ -80,6 +83,9 @@ class UserTest < Test::Unit::TestCase
     should have_valid(:password).when('password')
     should_not have_valid(:password).when(nil)
   end
+
+  # Using .when is optional. Without it, the existing value is examined.
+  should_not have_valid(:email)
 end
 ```
 

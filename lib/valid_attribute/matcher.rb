@@ -44,23 +44,35 @@ module ValidAttribute
     private
 
     def check_values(subject)
-      unless values
-        raise ::ValidAttribute::NoValues, "you need to set the values with .when on the matcher. Example: have_valid(:name).when('Brian')"
-      end
-
       self.subject       = subject
       self.failed_values = []
       self.passed_values = []
 
-      values.each do |value|
-        subject.send("#{attr}=", value)
-        subject.valid?
+      if values
+        check_specified_values
+      else
+        check_existing_value
+      end
+    end
 
-        if invalid_attribute?(subject, attr)
-          self.failed_values << value
-        else
-          self.passed_values << value
-        end
+    def check_specified_values
+      values.each do |value|
+        check_value value
+      end
+    end
+
+    def check_existing_value
+      check_value subject.send("#{attr}")
+    end
+
+    def check_value(value)
+      subject.send("#{attr}=", value)
+      subject.valid?
+
+      if invalid_attribute?(subject, attr)
+        self.failed_values << value
+      else
+        self.passed_values << value
       end
     end
 
