@@ -31,7 +31,7 @@ describe 'ValidAttribute' do
       describe 'messages' do
         it '#negative_failue_message' do
           @matcher.matches?(@user)
-          @matcher.negative_failure_message.should == " expected User#name to not accept the values: \"abc\", 123"
+          @matcher.negative_failure_message.should == " expected User#name to reject the values: \"abc\", 123"
         end
       end
     end
@@ -82,7 +82,7 @@ describe 'ValidAttribute' do
 
         it '#negative_failure_message' do
           @matcher.matches?(@user)
-          @matcher.negative_failure_message.should == " expected User#name to not accept the value: \"abc\""
+          @matcher.negative_failure_message.should == " expected User#name to reject the value: \"abc\""
         end
 
         it '#description' do
@@ -90,13 +90,55 @@ describe 'ValidAttribute' do
         end
       end
     end
-  end
 
-  it 'requires .when to always be used' do
-    matcher = @should.have_valid(:name)
-    expect do
-      matcher.matches?(@user)
-    end.to raise_error ValidAttribute::NoValues, "you need to set the values with .when on the matcher. Example: have_valid(:name).when('Brian')"
+    context 'no values are specified with .when' do
+      context 'data is valid' do
+        before do
+          @user.stubs(:valid?).returns(true)
+          @user.stubs(:name).returns(:abc)
+          @matcher = @should.have_valid(:name)
+        end
+
+        it 'matches? returns true' do
+          @matcher.matches?(@user).should be_true
+        end
+
+        it 'does_not_match? returns false' do
+          @matcher.does_not_match?(@user).should be_false
+        end
+
+        describe 'messages' do
+          it '#negative_failue_message' do
+            @matcher.matches?(@user)
+            @matcher.negative_failure_message.should == " expected User#name to reject the value: :abc"
+          end
+        end
+      end
+
+      context 'data is invalid' do
+        before do
+          @user.stubs(:valid?).returns(false)
+          @user.stubs(:errors).returns({:name => ["can't be a symbol"]})
+          @user.stubs(:name).returns(:abc)
+          @matcher = @should.have_valid(:name)
+        end
+
+        it 'matches? returns false' do
+          @matcher.matches?(@user).should be_false
+        end
+
+        it 'does_not_match? returns true' do
+          @matcher.does_not_match?(@user).should be_true
+        end
+
+        describe 'messages' do
+          it '#failue_message' do
+            @matcher.matches?(@user)
+            @matcher.failure_message.should == " expected User#name to accept the value: :abc"
+          end
+        end
+      end
+    end
   end
 
 end
