@@ -31,7 +31,7 @@ describe 'ValidAttribute' do
       describe 'messages' do
         it '#negative_failue_message' do
           @matcher.matches?(@user)
-          @matcher.negative_failure_message.should == " expected User#name to not accept the values: \"abc\", 123"
+          @matcher.negative_failure_message.should == " expected User#name to reject the values: \"abc\", 123"
         end
       end
     end
@@ -82,7 +82,7 @@ describe 'ValidAttribute' do
 
         it '#negative_failure_message' do
           @matcher.matches?(@user)
-          @matcher.negative_failure_message.should == " expected User#name to not accept the value: \"abc\""
+          @matcher.negative_failure_message.should == " expected User#name to reject the value: \"abc\""
         end
 
         it '#description' do

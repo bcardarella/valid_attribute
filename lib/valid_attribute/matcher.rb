@@ -21,9 +21,9 @@ module ValidAttribute
 
     def negative_failure_message
       if passed_values.size == 1
-        " expected #{subject.class}##{attr} to not accept the value: #{quote_values(passed_values)}"
+        " expected #{subject.class}##{attr} to reject the value: #{quote_values(passed_values)}"
       else
-        " expected #{subject.class}##{attr} to not accept the values: #{quote_values(passed_values)}"
+        " expected #{subject.class}##{attr} to reject the values: #{quote_values(passed_values)}"
       end
     end
 
