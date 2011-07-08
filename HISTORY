@@ -1,3 +1,9 @@
+== 1.1.0
+  #when is not necessary [davisre]
+
+== 1.0.0
+  Gold!
+
 == 0.2.1
   Better value quoting using #inspect
 
