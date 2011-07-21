@@ -86,7 +86,7 @@ describe 'ValidAttribute' do
         end
 
         it '#description' do
-          @matcher.description.should == "be valid when: \"abc\", 123"
+          @matcher.description.should == "be valid when name is: \"abc\", 123"
         end
       end
     end
