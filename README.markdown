@@ -1,5 +1,7 @@
 # ValidAttribute #
 
+[![Build Status](http://travis-ci.org/bcardarella/valid_attribute.png)](http://travis-ci.org/bcardarella/valid_attribute)
+
 ValidAttribute is a minimalist matcher for validation BDD.
 
 Supported ORMs
