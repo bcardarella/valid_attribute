@@ -66,18 +66,19 @@ module ValidAttribute
     end
 
     def check_value(value)
-      subject.send("#{attr}=", value)
-      subject.valid?
+      cloned_subject = subject.clone
+      cloned_subject.send("#{attr}=", value)
+      cloned_subject.valid?
 
-      if invalid_attribute?(subject, attr)
+      if invalid_attribute?(cloned_subject, attr)
         self.failed_values << value
       else
         self.passed_values << value
       end
     end
 
-    def invalid_attribute?(subject, attr)
-      errors = subject.errors[attr]
+    def invalid_attribute?(cloned_subject, attr)
+      errors = cloned_subject.errors[attr]
       errors.respond_to?(:empty?) ? !errors.empty? : !!errors
     end
 
