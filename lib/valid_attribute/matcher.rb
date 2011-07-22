@@ -28,7 +28,7 @@ module ValidAttribute
     end
 
     def description
-      "be valid when: #{quote_values(values)}"
+      "be valid when #{attr} is: #{quote_values(values)}"
     end
 
     def matches?(subject)
