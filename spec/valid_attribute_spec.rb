@@ -29,7 +29,7 @@ describe 'ValidAttribute' do
       end
 
       describe 'messages' do
-        it '#negative_failue_message' do
+        it '#negative_failure_message' do
           @matcher.matches?(@user)
           @matcher.negative_failure_message.should == " expected User#name to reject the values: \"abc\", 123"
         end
@@ -52,7 +52,7 @@ describe 'ValidAttribute' do
       end
 
       describe 'messages' do
-        it '#failue_message' do
+        it '#failure_message' do
           @matcher.matches?(@user)
           @matcher.failure_message.should == " expected User#name to accept the values: :abc, nil"
         end
@@ -108,7 +108,7 @@ describe 'ValidAttribute' do
         end
 
         describe 'messages' do
-          it '#negative_failue_message' do
+          it '#negative_failure_message' do
             @matcher.matches?(@user)
             @matcher.negative_failure_message.should == " expected User#name to reject the value: :abc"
           end
@@ -132,7 +132,7 @@ describe 'ValidAttribute' do
         end
 
         describe 'messages' do
-          it '#failue_message' do
+          it '#failure_message' do
             @matcher.matches?(@user)
             @matcher.failure_message.should == " expected User#name to accept the value: :abc"
           end
