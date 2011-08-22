@@ -99,6 +99,11 @@ describe 'ValidAttribute' do
           @matcher = @should.have_valid(:name)
         end
 
+        it 'prints the description' do
+          @matcher.matches?(@user)
+          @matcher.description.should eq('be valid when name is: :abc')
+        end
+
         it 'matches? returns true' do
           @matcher.matches?(@user).should be_true
         end

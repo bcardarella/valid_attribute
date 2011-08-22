@@ -48,21 +48,16 @@ module ValidAttribute
       self.failed_values = []
       self.passed_values = []
 
-      if values
-        check_specified_values
-      else
-        check_existing_value
-      end
-    end
-
-    def check_specified_values
       values.each do |value|
         check_value value
       end
     end
 
-    def check_existing_value
-      check_value subject.send("#{attr}")
+    def values
+      unless @values
+        @values = [subject.send(attr)]
+      end
+      @values
     end
 
     def check_value(value)
