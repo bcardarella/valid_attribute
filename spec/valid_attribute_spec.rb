@@ -92,16 +92,26 @@ describe 'ValidAttribute' do
     end
 
     context 'no values are specified with .when' do
+      context 'data is not set' do
+        before do
+          @user.stubs(:valid?).returns(true)
+          @user.stubs(:name).returns(nil)
+          @matcher = @should.have_valid(:name)
+        end
+
+        subject do
+          @matcher.matches?(@user)
+          @matcher
+        end
+
+        its(:description) { should eq('be valid when name is: nil') }
+      end
+
       context 'data is valid' do
         before do
           @user.stubs(:valid?).returns(true)
           @user.stubs(:name).returns(:abc)
           @matcher = @should.have_valid(:name)
-        end
-
-        it 'prints the description' do
-          @matcher.matches?(@user)
-          @matcher.description.should eq('be valid when name is: :abc')
         end
 
         it 'matches? returns true' do
