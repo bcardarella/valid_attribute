@@ -1,3 +1,6 @@
+== 1.2.0
+  MiniTest::Spec support [wojtekmach]
+
 == 1.1.0
   #when is not necessary [davisre]
 
