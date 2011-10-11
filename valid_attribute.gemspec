@@ -23,9 +23,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'bourne'
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'minitest-matchers'
-  if RUBY_VERSION >= '1.9'
-    s.add_development_dependency 'ruby-debug19'
-  else
-    s.add_development_dependency 'ruby-debug'
-  end
 end
