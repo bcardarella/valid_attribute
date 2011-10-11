@@ -7,6 +7,8 @@ end
 
 if defined?(RSpec)
   require 'valid_attribute/rspec'
+elsif defined?(Spec)
+  require 'valid_attribute/spec'
 elsif defined?(MiniTest::Matchers)
   require 'valid_attribute/minitest'
 else
