@@ -43,7 +43,6 @@ If you want to you use it with `MiniTest::Spec` you can use either `shoulda-cont
 gem 'minitest-matchers'
 
 # test_helper.rb
-require 'minitest/matchers'
 require 'valid_attribute'
 ```
 
@@ -106,20 +105,16 @@ require 'minitest/matchers'
 describe User do
   subject { User.new }
 
-  # The .when method can take any number of values that you want to pass
-  must { have_valid(:email).when('test@test.com', 'test+spam@gmail.com') }
-  wont { have_valid(:email).when('fail', 123) }
-  must { have_valid(:name).when('TestName') }
-  wont { have_valid(:name).when('Test') }
+  it { must have_valid(:email).when('test@test.com', 'test+spam@gmail.com') }
+  it { wont have_valid(:email).when('fail', 123) }
+  it { must have_valid(:name).when('TestName') }
+  it { wont have_valid(:name).when('Test') }
 
   describe 'password' do
-    subject { User.new(:password_confirmation => 'password') }
-    must {  have_valid(:password).when('password') }
-    wont {  have_valid(:password).when(nil) }
+    subject { User.new.tap { |u| u.password_confirmation = "password" } }
+    it { must have_valid(:password).when('password') }
+    it { wont have_valid(:password).when(nil) }
   end
-
-  # Using .when is optional. Without it, the existing value is examined.
-  wont have_valid(:email)
 end
 ```
 
