@@ -6,7 +6,7 @@ ValidAttribute is a minimalist matcher for validation BDD.
 
 Supported ORMs
 
-* ActiveModel based (ActiveRecord >= 3.0, Mongoid >= 2.0, MongoMapper >= 0.9
+* ActiveModel based (ActiveRecord >= 3.0, Mongoid >= 2.0, MongoMapper >= 0.9)
 * ActiveRecord <= 2.3
 * DataMapper
 * Custom (with compatible API, see below)
