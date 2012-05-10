@@ -11,6 +11,6 @@ elsif defined?(Spec)
   require 'valid_attribute/spec'
 elsif defined?(MiniTest::Matchers)
   require 'valid_attribute/minitest'
-else
+elsif defined?(Test::Unit)
   require 'valid_attribute/test_unit'
 end
