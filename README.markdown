@@ -143,8 +143,8 @@ end
 
 ## Legal ##
 
-Brian Cardarella &copy; 2011
+[DockYard](http://dockyard.com), LLC &copy; 2012
 
-[@bcardarella](http://twitter.com/bcardarella)
+[@dockyard](http://twitter.com/dockyard)
 
 [Licensed under the MIT license](http://www.opensource.org/licenses/mit-license.php)
