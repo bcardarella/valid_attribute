@@ -1,6 +1,3 @@
-source "http://rubygems.org"
-
-# Specify your gem's dependencies in valid_attribute.gemspec
-gemspec
-
+source 'http://rubygems.org'
 gem 'debugger'
+gemspec
