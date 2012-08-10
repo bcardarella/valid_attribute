@@ -1,13 +1,13 @@
 require 'rubygems'
+begin
+  require 'debugger'
+rescue LoadError
+end
 require 'bundler'
 Bundler.require
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-begin
-  require 'debugger'
-rescue LoadError
-end
 require 'rspec'
 require 'rspec/autorun'
 require 'bourne'
