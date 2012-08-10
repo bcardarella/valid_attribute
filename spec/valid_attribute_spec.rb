@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'user'
+require 'models/user'
 
 class Should
   include ValidAttribute::Method
