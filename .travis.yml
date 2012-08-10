@@ -2,9 +2,9 @@ rvm:
   - 1.8.7
   - 1.9.3
   - ree
-  - jruby18-mode
-  - jruby19-mode
-  - rbx18-mode
-  - rbx19-mode
+  - jruby-18mode
+  - jruby-19mode
+  - rbx-18mode
+  - rbx-19mode
 
 gemfile: Gemfile.travis
