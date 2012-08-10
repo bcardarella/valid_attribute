@@ -8,10 +8,12 @@ require 'rspec'
 require 'rspec/autorun'
 require 'bourne'
 require 'valid_attribute'
-require 'debugger'
+begin
+  require 'debugger'
+rescue LoadError
+end
 
 RSpec.configure do |config|
   config.mock_with :mocha
 end
-
 
