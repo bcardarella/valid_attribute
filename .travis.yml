@@ -7,5 +7,4 @@ rvm:
   - rbx18-mode
   - rbx19-mode
 
-gemfile:
-  - gemfiles/Gemfile
+gemfile: Gemfile.travis
