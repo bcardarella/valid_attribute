@@ -24,4 +24,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'bourne'
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'minitest-matchers'
+  s.add_development_dependency 'debugger'
 end

@@ -154,6 +154,26 @@ describe 'ValidAttribute' do
         end
       end
     end
+
+    describe 'cloning' do
+      before do
+        @matcher = @should.have_valid(:name)
+      end
+
+      context 'when no cloning' do
+        it 'returns false' do
+          @matcher.clone?.should be_false
+        end
+      end
+      context 'when cloned' do
+        before do
+          @matcher.clone
+        end
+        it 'returns true' do
+          @matcher.clone?.should be_true
+        end
+      end
+    end
   end
 
 end

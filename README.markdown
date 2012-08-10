@@ -141,6 +141,19 @@ class User
 end
 ```
 
+## Cloning ##
+
+If you feel that the setters are mutating parts of the object when
+testing multiple values you can force the test subject be cloned in
+between each test
+
+```ruby
+it { should have_valid(:name).when('Brian').clone }
+```
+
+Be aware the cloning can cause some unpredicatable results and may lead
+to more pain than help
+
 ## Legal ##
 
 [DockYard](http://dockyard.com), LLC &copy; 2012
