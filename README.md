@@ -1,6 +1,7 @@
 # ValidAttribute #
 
 [![Build Status](http://travis-ci.org/bcardarella/valid_attribute.png)](http://travis-ci.org/bcardarella/valid_attribute)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/bcardarella/valid_attribute)
 
 ValidAttribute is a minimalist matcher for validation BDD.
 
