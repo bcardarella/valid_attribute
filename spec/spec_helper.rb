@@ -9,4 +9,3 @@ require 'valid_attribute'
 RSpec.configure do |config|
   config.mock_with :mocha
 end
-
