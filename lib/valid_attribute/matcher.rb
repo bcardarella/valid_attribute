@@ -6,6 +6,12 @@ module ValidAttribute
       self.attr = attr
     end
 
+    # The collection of values to test against for the given
+    # attribute
+    #
+    # @params [Array]
+    #
+    # @return [ValidAttribute::Matcher]
     def when(*values)
       self.values = values
       self
@@ -37,6 +43,13 @@ module ValidAttribute
       !!@clone
     end
 
+    # Force the matcher to clone the subject in between
+    # testing each value.
+    #
+    # *Warning* This could lead to unintended results. The clone
+    # is not a deep copy
+    #
+    # @return [ValidAttribute::Matcher]
     def clone
       @clone = true
     end
@@ -84,6 +97,5 @@ module ValidAttribute
     def message(values, verb)
       " expected #{subject.class}##{attr} to #{verb} the value#{values.size == 1 ? nil : 's'}: #{quote_values(values)}"
     end
-
   end
 end
