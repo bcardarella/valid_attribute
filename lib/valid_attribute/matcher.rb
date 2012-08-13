@@ -12,19 +12,11 @@ module ValidAttribute
     end
 
     def failure_message
-      if failed_values.size == 1
-        " expected #{subject.class}##{attr} to accept the value: #{quote_values(failed_values)}"
-      else
-        " expected #{subject.class}##{attr} to accept the values: #{quote_values(failed_values)}"
-      end
+      message(failed_values, 'accept')
     end
 
     def negative_failure_message
-      if passed_values.size == 1
-        " expected #{subject.class}##{attr} to reject the value: #{quote_values(passed_values)}"
-      else
-        " expected #{subject.class}##{attr} to reject the values: #{quote_values(passed_values)}"
-      end
+      message(passed_values, 'reject')
     end
 
     def description
@@ -87,6 +79,10 @@ module ValidAttribute
 
     def quote_values(values)
       values.map { |value| value.inspect }.join(', ')
+    end
+
+    def message(values, verb)
+      " expected #{subject.class}##{attr} to #{verb} the value#{values.size == 1 ? nil : 's'}: #{quote_values(values)}"
     end
 
   end
