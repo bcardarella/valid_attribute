@@ -1,6 +1,6 @@
 # ValidAttribute #
 
-[![Build Status](http://travis-ci.org/bcardarella/valid_attribute.png)](http://travis-ci.org/bcardarella/valid_attribute)
+[![Build Status](https://secure.travis-ci.org/bcardarella/valid_attribute.png?branch=master)](http://travis-ci.org/bcardarella/valid_attribute)
 [![Dependency Status](https://gemnasium.com/bcardarella/valid_attribute.png?travis)](https://gemnasium.com/bcardarella/valid_attribute)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/bcardarella/valid_attribute)
 
