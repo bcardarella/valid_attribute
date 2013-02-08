@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.summary       = %q{Minimalist validation matcher}
   s.description   = %q{Minimalist validation matcher}
   s.files         = Dir['{lib}/**/*'] + ['README.md']
+  s.license       = 'MIT'
   s.require_paths = ['lib']
 
   s.add_development_dependency 'rake'
