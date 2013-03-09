@@ -150,7 +150,7 @@ end
 
 # RSpec
 describe User do
-  let(:names) { 'TestName', 'Test-name', "O'Namey", 'Maček' }
+  let(:names) { ['TestName', 'Test-name', "O'Namey", 'Maček'] }
   it { should have_valid(:first_name).when *names }
   it { should have_valid(:last_name).when *names }
 end
