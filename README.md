@@ -143,6 +143,20 @@ class User
 end
 ```
 
+## Don't Repeat Yourself ##
+
+```ruby
+# encoding: utf-8
+
+# RSpec
+describe User do
+  let(:names) { 'TestName', 'Test-name', "O'Namey", 'Maček' }
+  it { should have_valid(:first_name).when *names }
+  it { should have_valid(:last_name).when *names }
+end
+```
+
+
 ## Cloning ##
 
 If you feel that the setters are mutating parts of the object when
