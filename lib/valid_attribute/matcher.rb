@@ -25,6 +25,8 @@ module ValidAttribute
       message(passed_values, 'reject')
     end
 
+    alias_method :failure_message_when_negated, :negative_failure_message
+
     def description
       "be valid when #{attr} is: #{quote_values(values)}"
     end
