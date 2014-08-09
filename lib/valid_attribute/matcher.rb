@@ -1,9 +1,11 @@
 module ValidAttribute
   class Matcher
-    attr_accessor :attr, :values, :subject, :failed_values, :passed_values
+    attr_accessor :attr, :subject, :failed_values, :passed_values
+    attr_writer :values
 
     def initialize(attr)
       self.attr = attr
+      @clone = nil
     end
 
     # The collection of values to test against for the given
@@ -24,6 +26,7 @@ module ValidAttribute
     def negative_failure_message
       message(passed_values, 'reject')
     end
+    alias failure_message_when_negated negative_failure_message
 
     def description
       "be valid when #{attr} is: #{quote_values(values)}"
@@ -67,10 +70,7 @@ module ValidAttribute
     end
 
     def values
-      unless @values
-        @values = [subject.send(attr)]
-      end
-      @values
+      @values ||= [subject.send(attr)]
     end
 
     def check_value(value)
