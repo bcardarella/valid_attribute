@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'test_helper'
 require 'models/user'
 
 class Should
@@ -21,18 +21,18 @@ describe 'ValidAttribute' do
       end
 
       it 'matches? returns true' do
-        @matcher.matches?(@user).should be_true
+        @matcher.matches?(@user).must_equal true
       end
 
       it 'does_not_match? returns false' do
-        @matcher.does_not_match?(@user).should be_false
+        @matcher.does_not_match?(@user).must_equal false
       end
 
       describe 'messages' do
         it '#negative_failure_message' do
           @matcher.matches?(@user)
-          @matcher.negative_failure_message.should == " expected User#name to reject the values: \"abc\", 123"
-          @matcher.failure_message_when_negated.should == @matcher.negative_failure_message
+          @matcher.negative_failure_message.must_equal " expected User#name to reject the values: \"abc\", 123"
+          @matcher.failure_message_when_negated.must_equal @matcher.negative_failure_message
         end
       end
     end
@@ -45,17 +45,17 @@ describe 'ValidAttribute' do
       end
 
       it 'matches? returns false' do
-        @matcher.matches?(@user).should be_false
+        @matcher.matches?(@user).must_equal false
       end
 
       it 'does_not_match? returns true' do
-        @matcher.does_not_match?(@user).should be_true
+        @matcher.does_not_match?(@user).must_equal true
       end
 
       describe 'messages' do
         it '#failure_message' do
           @matcher.matches?(@user)
-          @matcher.failure_message.should == " expected User#name to accept the values: :abc, nil"
+          @matcher.failure_message.must_equal " expected User#name to accept the values: :abc, nil"
         end
       end
     end
@@ -68,26 +68,26 @@ describe 'ValidAttribute' do
       end
 
       it 'matches? returns false' do
-        @matcher.matches?(@user).should be_false
+        @matcher.matches?(@user).must_equal false
       end
 
       it 'does_not_match? returns false' do
-        @matcher.does_not_match?(@user).should be_false
+        @matcher.does_not_match?(@user).must_equal false
       end
 
       describe 'messages' do
         it '#failure_message' do
           @matcher.matches?(@user)
-          @matcher.failure_message.should == " expected User#name to accept the value: 123"
+          @matcher.failure_message.must_equal " expected User#name to accept the value: 123"
         end
 
         it '#negative_failure_message' do
           @matcher.matches?(@user)
-          @matcher.negative_failure_message.should == " expected User#name to reject the value: \"abc\""
+          @matcher.negative_failure_message.must_equal " expected User#name to reject the value: \"abc\""
         end
 
         it '#description' do
-          @matcher.description.should == "be valid when name is: \"abc\", 123"
+          @matcher.description.must_equal "be valid when name is: \"abc\", 123"
         end
       end
     end
@@ -105,7 +105,9 @@ describe 'ValidAttribute' do
           @matcher
         end
 
-        its(:description) { should eq('be valid when name is: nil') }
+        it 'description' do
+          subject.description.must_equal('be valid when name is: nil')
+        end
       end
 
       context 'data is valid' do
@@ -116,17 +118,17 @@ describe 'ValidAttribute' do
         end
 
         it 'matches? returns true' do
-          @matcher.matches?(@user).should be_true
+          @matcher.matches?(@user).must_equal true
         end
 
         it 'does_not_match? returns false' do
-          @matcher.does_not_match?(@user).should be_false
+          @matcher.does_not_match?(@user).must_equal false
         end
 
         describe 'messages' do
           it '#negative_failure_message' do
             @matcher.matches?(@user)
-            @matcher.negative_failure_message.should == " expected User#name to reject the value: :abc"
+            @matcher.negative_failure_message.must_equal " expected User#name to reject the value: :abc"
           end
         end
       end
@@ -140,17 +142,17 @@ describe 'ValidAttribute' do
         end
 
         it 'matches? returns false' do
-          @matcher.matches?(@user).should be_false
+          @matcher.matches?(@user).must_equal false
         end
 
         it 'does_not_match? returns true' do
-          @matcher.does_not_match?(@user).should be_true
+          @matcher.does_not_match?(@user).must_equal true
         end
 
         describe 'messages' do
           it '#failure_message' do
             @matcher.matches?(@user)
-            @matcher.failure_message.should == " expected User#name to accept the value: :abc"
+            @matcher.failure_message.must_equal " expected User#name to accept the value: :abc"
           end
         end
       end
@@ -163,7 +165,7 @@ describe 'ValidAttribute' do
 
       context 'when no cloning' do
         it 'returns false' do
-          @matcher.clone?.should be_false
+          @matcher.clone?.must_equal false
         end
       end
       context 'when cloned' do
@@ -171,7 +173,7 @@ describe 'ValidAttribute' do
           @matcher.clone
         end
         it 'returns true' do
-          @matcher.clone?.should be_true
+          @matcher.clone?.must_equal true
         end
       end
     end
