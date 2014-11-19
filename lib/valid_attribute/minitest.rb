@@ -1,4 +1,4 @@
-class MiniTest::Spec
+class Minitest::Spec
   include ::ValidAttribute::Method
 end
 
