@@ -10,5 +10,7 @@ if defined?(RSpec)
 elsif defined?(Spec)
   require 'valid_attribute/spec'
 elsif defined?(MiniTest::Matchers)
+  require 'valid_attribute/mini_test'
+elsif defined?(Minitest::Matches)
   require 'valid_attribute/minitest'
 end
