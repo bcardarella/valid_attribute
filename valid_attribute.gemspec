@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.homepage      = 'https://github.com/bcardarella/valid_attribute'
   s.summary       = %q{Minimalist validation matcher}
   s.description   = %q{Minimalist validation matcher}
+  s.license       = 'MIT'
   s.files         = Dir['{lib}/**/*'] + ['README.md']
   s.require_paths = ['lib']
 
