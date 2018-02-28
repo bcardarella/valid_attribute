@@ -1,8 +1,8 @@
 # ValidAttribute #
 
-[![Build Status](https://secure.travis-ci.org/bcardarella/valid_attribute.png?branch=master)](http://travis-ci.org/bcardarella/valid_attribute)
-[![Dependency Status](https://gemnasium.com/bcardarella/valid_attribute.png?travis)](https://gemnasium.com/bcardarella/valid_attribute)
-[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/bcardarella/valid_attribute)
+[![Build Status](https://secure.travis-ci.org/bcardarella/valid_attribute.svg?branch=master)](http://travis-ci.org/bcardarella/valid_attribute)
+[![Dependency Status](https://gemnasium.com/bcardarella/valid_attribute.svg?travis)](https://gemnasium.com/bcardarella/valid_attribute)
+[![Code Climate](https://codeclimate.com/github/bcardarella/valid_attribute.svg)](https://codeclimate.com/github/bcardarella/valid_attribute)
 
 ValidAttribute is a minimalist matcher for validation BDD.
 
