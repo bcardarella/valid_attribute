@@ -1,3 +1,6 @@
+![GitHub Dark](https://github.com/github-dark.png#gh-light-mode-only)
+![GitHub Light](https://github.com/github-light.png#gh-dark-mode-only)
+
 # ValidAttribute #
 
 [![Build Status](https://secure.travis-ci.org/bcardarella/valid_attribute.png?branch=master)](http://travis-ci.org/bcardarella/valid_attribute)
