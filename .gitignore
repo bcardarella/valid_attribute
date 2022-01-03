@@ -1,7 +1,0 @@
-*.gem
-.bundle
-*.lock
-pkg/*
-doc/
-.yardoc
-bin/*
